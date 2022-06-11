@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Product;
+use App\Models\ProductDetail;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
@@ -27,12 +28,14 @@ class ProductResource extends JsonResource
             'option_count' => $this->option_count,
             'quantity' => $this->quantity,
             'images' => ImageAssignResource::collection($this->whenLoaded('images')),
-            'default_image' => new BlobResource($this->whenLoaded('image')),
+            'image' => new BlobResource($this->whenLoaded('image')),
             'details' => ProductDetailResource::collection($this->whenLoaded('details')),
             'category' => new CategoryResource($this->whenLoaded('category')),
             'provider' => new CategoryResource($this->whenLoaded('provider')),
             'visible' => $this->visible,
             'description' => $this->description,
+            'min_price' => ProductDetail::where('product_id', $this->id)->min('out_price'),
+            'default_detail' => ProductDetail::where('product_id', $this->id)->orderBy('out_price', 'asc')->first()
         ];
     }
 }

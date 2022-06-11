@@ -3,61 +3,40 @@
 
 <head>
     <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="Mannat Themes">
-        <meta name="keyword" content="">
-
-        <title>@yield('title')</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-        <!-- Theme icon -->
-        <link rel="shortcut icon" href="{{asset('assets/admin/template1/images/LoGo_Doan.png')}}">
-
-        <link href="{{asset('assets/admin/template1/plugins/morris-chart/morris.css')}}" rel="stylesheet">
-        <!-- Theme Css -->
-        <link href="{{asset('assets/admin/template1/css/bootstrap.min.css')}}" rel="stylesheet">
-        <link href="{{asset('assets/admin/template1/css/slidebars.min.css')}}" rel="stylesheet">
-        <link href="{{asset('assets/admin/template1/css/icons.css')}}" rel="stylesheet">
-        <link href="{{asset('assets/admin/template1/css/menu.css')}}" rel="stylesheet" type="text/css">
-        <link href="{{asset('assets/admin/template1/css/style.css')}}" rel="stylesheet">
-
-    {{-- Không được xóa --}}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mannat Themes">
+    <meta name="keyword" content="">
+    <title>@yield('title')</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!-- Theme icon -->
+    <link rel="shortcut icon" href="{{asset('assets/admin/template1/images/LoGo_Doan.png')}}">
+    <link href="{{asset('assets/admin/template1/plugins/morris-chart/morris.css')}}" rel="stylesheet">
+    <!-- Theme Css -->
+    <link href="{{asset('assets/admin/template1/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/admin/template1/css/slidebars.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/admin/template1/css/icons.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/admin/template1/css/menu.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('assets/admin/template1/css/style.css')}}" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     <script src="/assets/angular.min.js"></script>
     <script src="/assets/admin/js/scripts.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
     <script src="/assets/admin/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    {{-- End --}}
 </head>
-
 <body class="sticky-header">
     <section>
-        <!-- sidebar left start-->
         @include('admin/layout/admin-sidebar')
-        <!-- sidebar left end-->
-
-        <!-- body content start-->
         <div class="body-content">
-            <!-- header section start-->
             @include('admin/layout/admin-navbar')
-            <!-- header section end-->
-
             <div class="container-fluid">
                 <div class="pb-3"></div>
                 @yield('main-content')                          
             </div>
-            <!--end container-->
-
-            <!--footer section start-->
             @include('admin/layout/admin-footer')
-            <!--footer section end-->
-
-
-            <!-- Right Slidebar start -->
             <div class="sb-slidebar sb-right sb-style-overlay">
                 <div class="right-bar slimscroll">
                     <span class="r-close-btn sb-close"><i class="fa fa-times"></i></span>
-
                     <ul class="nav nav-tabs nav-justified-">
                         <li class="">
                             <a href="#chat" class="active" data-toggle="tab">Chat</a>
@@ -331,9 +310,7 @@
                     </div>
                 </div>
             </div>
-            <!--end Right Slidebar-->
         </div>
-        <!--end body content-->
     </section>
     <script src="{{asset('assets/admin/template1/js/jquery-3.2.1.min.js')}}"></script>
         <script src="{{asset('assets/admin/template1/js/popper.min.js')}}"></script>
@@ -342,19 +319,15 @@
         <script src="{{asset('assets/admin/template1/js/modernizr.min.js')}}"></script>
         <script src="{{asset('assets/admin/template1/js/jquery.slimscroll.min.js')}}"></script>
         <script src="{{asset('assets/admin/template1/js/slidebars.min.js')}}"></script>
-
         <!--plugins js-->
         <script src="{{asset('assets/admin/template1/plugins/counter/jquery.counterup.min.js')}}"></script>
         <script src="{{asset('assets/admin/template1/plugins/waypoints/jquery.waypoints.min.js')}}"></script>
         <script src="{{asset('assets/admin/template1/plugins/sparkline-chart/jquery.sparkline.min.js')}}"></script>
         <script src="{{asset('assets/admin/template1/pages/jquery.sparkline.init.js')}}"></script>
-
         <script src="{{asset('assets/admin/template1/plugins/chart-js/Chart.bundle.js')}}"></script>
         <script src="{{asset('assets/admin/template1/plugins/morris-chart/raphael-min.js')}}"></script>
         <script src="{{asset('assets/admin/template1/plugins/morris-chart/morris.js')}}"></script>
         <script src="{{asset('assets/admin/template1/pages/dashboard-init.js')}}"></script>
-
-
         <!--app js-->
         <script src="{{asset('assets/admin/template1/js/jquery.app.js')}}"></script>
         <script>
@@ -368,5 +341,4 @@
 
         @yield('scripts')
 </body>
-
 </html>

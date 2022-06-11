@@ -35,26 +35,27 @@
                                     <th>Tên sản phẩm</th>
                                     <th>Giá bán</th>
                                     <th>Số lượng</th>
-                                    <th>Tổng đơn</th>
+                                    <th>Đơn giá</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr ng-repeat="c in cart track by $index">
                                     <td class="product-thumbnail">
-                                        <a href="#"><img src="assets/images/product-image/mini-cart/1.jpg" alt=""></a>
+                                        <a href="#"><img class="w-100" ng-if="c.product.image" alt=""
+                                            src="@{{ baseUrl + '/api/files/' + c.product.image.file_path }}" ></a>
                                     </td>
-                                    <td class="product-name"><a href="#">Product Name</a></td>
-                                    <td class="product-price-cart"><span class="amount">$60.00</span></td>
+                                    <td class="product-name">@{{ c.product.product.name }}</td>
+                                    <td class="product-price-cart"><span class="amount">@{{ c.product.out_price | number }}đ</span></td>
                                     <td class="product-quantity">
                                         <div class="cart-plus-minus"><div class="dec qtybutton">-</div>
                                             <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1">
                                         <div class="inc qtybutton">+</div></div>
                                     </td>
-                                    <td class="product-subtotal">$70.00</td>
+                                    <td class="product-subtotal">@{{ c.product.out_price | number }}đ</td>
                                     <td class="product-remove">
                                         <a href="#"><i class="fa fa-pencil-alt"></i></a>
-                                        <a href="#"><i class="fa fa-times"></i></a>
+                                        <a href="#"><i ng-click="deleteCart(c.product, c.quantity)" class="fa fa-times"></i></a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -64,10 +65,11 @@
                         <div class="col-lg-12">
                             <div class="cart-shiping-update-wrapper">
                                 <div class="cart-shiping-update">
-                                    <a href="#">Tiếp tục mua sắm</a>
+                                    <a href="/home/pages/shop">Tiếp tục mua sắm</a>
+                                    <a href="#" class="primary-btn cart-btn cart-btn-right" style="opacity: 0;"><span class="icon_loading"></span>Update Cart</a>
                                 </div>
                                 <div class="cart-clear">
-                                    <a href="#">Xóa giỏ hàng</a>
+                                    <a ng-click="deleteCart(c.product, c.quantity)" href="#">Xóa giỏ hàng</a>
                                 </div>
                             </div>
                         </div>
@@ -124,7 +126,7 @@
                                         </label>
                                         <input type="text">
                                     </div>
-                                    <button class="cart-btn-2" type="submit">Get A Quote</button>
+                                    <button class="cart-btn-2" type="submit">Nhận báo giá</button>
                                 </div>
                             </div>
                         </div>
@@ -148,15 +150,15 @@
                             <div class="title-wrap">
                                 <h4 class="cart-bottom-title section-bg-gary-cart">Tổng giỏ hàng</h4>
                             </div>
-                            <h5>Tổng giá trị đơn hàng <span>$260.00</span></h5>
+                            <h5>Tổng giá trị đơn hàng <span>@{{ totalCart | number }}đ</span></h5>
                             <div class="total-shipping">
                                 <h5>Tổng phí giao hàng</h5>
                                 <ul>
-                                    <li><input type="checkbox"> Standard <span>$20.00</span></li>
-                                    <li><input type="checkbox"> Express <span>$30.00</span></li>
+                                    <li><input type="checkbox"> Standard <span>0 VNĐ</span></li>
+                                    <li><input type="checkbox"> Express <span>0 VNĐ</span></li>
                                 </ul>
                             </div>
-                            <h4 class="grand-totall-title">Tổng đơn <span>$260.00</span></h4>
+                            <h4 class="grand-totall-title">Tổng đơn <span>@{{ totalCart | number }}đ</span></h4>
                             <a href="#">Thanh toán</a>
                         </div>
                     </div>
@@ -165,4 +167,8 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+    <script src="/assets/home/js/homeController.js"></script>
+    <script src="/assets/home/js/appController.js"></script>
 @endsection

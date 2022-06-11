@@ -1,6 +1,5 @@
 const route = "products";
 extendController = ($scope, $http) => {
-    $scope.baseUrl = "https://localhost:44394";
     // $scope.name = '';
     // $scope.visible = true;
     $scope.fields = [

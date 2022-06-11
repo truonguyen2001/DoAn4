@@ -1,13 +1,13 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\IndexController;
-use App\Http\Controllers\ProductDetailController;
+use App\Http\Controllers\Home\LoginApiController;
+use App\Http\Controllers\Home\HomeApiController;
+use App\Http\Controllers\Home\ProductDetailApiController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-use App\Http\Controllers\ShopController;
+use App\Http\Controllers\Home\ShopApiController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,6 +36,7 @@ Route::prefix('admin')->group(function () {
     Route::get('invoice', [AdminController::class, 'Invoice']);
     Route::post('invoice/{id}', [AdminController::class, 'InvoiceSave']);
     Route::get('invoice/{id}', [AdminController::class, 'InvoiceDetail']);
+    Route::get('import', [AdminController::class, 'Import']);
     Route::get('category', [AdminController::class, 'Category']);
     Route::get('product-detail', [AdminController::class, 'ProductDetails']);
     Route::get('providers', [AdminController::class, 'Providers']);
@@ -47,20 +48,20 @@ Route::get('', function () {
     return redirect(route('home.index'));
 });
 Route::prefix('home')->group(function () {
-    Route::get('',  [IndexController::class, 'index'])->name('home.index');
+    Route::get('',  [HomeApiController::class, 'index'])->name('home.index');
     Route::get('pages/cart', function () {
         return view('home/pages/cart', ['categories' => Category::all()]);
     })->name('cart');
 
-    Route::get('pages/productdetail/{id}', [ProductDetailController::class,'index'])->name('productdetail');
+    Route::get('pages/productdetail/{id}', [ProductDetailApiController::class,'index'])->name('productdetail');
 
     // Route::get('pages/shop', function () {
     //     return view('home/pages/shop', ['categories' => Category::all()]);
     // })->name('shop');
 
-    Route::get('pages/shop/{id}', [ShopController::class, 'index'])->name('shop-list');
-    Route::get('pages/shop', [ShopController::class, 'shop'])->name('shop');
-
+    Route::get('pages/shop/{id}', [ShopApiController::class, 'index'])->name('shop-list');
+    Route::get('pages/shop', [ShopApiController::class, 'shop'])->name('shop');
+    Route::get('pages/cart', [ShopApiController::class, 'Cart']);
     Route::get('pages/contact', function () {
         return view('home/pages/contact', ['categories' => Category::all()]);
     })->name('contact');
@@ -80,7 +81,7 @@ Route::fallback(function () {
 });
 
 Route::prefix('admin')->namespace('Admin')->middleware('auth')->group(function () {
-    Route::get('login', [LoginController::class, 'login'])->name('admin.login')->withoutMiddleware('auth');
-    Route::get('logout', [LoginController::class, 'logout'])->name('admin.logout');
-    Route::post('login-post', [LoginController::class, 'loginPost'])->name('admin.login-post')->withoutMiddleware('auth');
+    Route::get('login', [LoginApiController::class, 'login'])->name('admin.login')->withoutMiddleware('auth');
+    Route::get('logout', [LoginApiController::class, 'logout'])->name('admin.logout');
+    Route::post('login-post', [LoginApiController::class, 'loginPost'])->name('admin.login-post')->withoutMiddleware('auth');
 });

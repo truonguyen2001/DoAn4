@@ -14,7 +14,7 @@
         <!--sidebar nav start-->
         <ul class="side-navigation">
           <li class="nav-item nav-category">
-            <span class="nav-link">Menu</span>
+            <span class="nav-link" style="color: bisque;">Menu</span>
           </li>
           {{-- <li class="nav-item menu-items">
             <a class="nav-link" href="{{asset('admin/pages/admin-layout')}}">
@@ -25,6 +25,7 @@
             </a>
           </li> --}}
           <li class="nav-item menu-items">
+            
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <span class="menu-icon">
                 <i class="mdi mdi-laptop"></i>
@@ -34,8 +35,8 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/admin/import">Quản lý hóa đơn nhập</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/admin/invoice">Quản lý hóa đơn bán</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/invoice-detail">Chi tiết hóa đơn bán</a></li>
               </ul>
             </div>
           </li>
@@ -55,14 +56,14 @@
               <span class="menu-title">Quản lý sản phẩm</span>
             </a>
           </li>
-          <li class="nav-item menu-items">
+          {{-- <li class="nav-item menu-items">
             <a class="nav-link" href="/admin/providers">
               <span class="menu-icon">
                 <i class="mdi mdi-table-large"></i>
               </span>
               <span class="menu-title">Quản lý nhà cung cấp</span>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item menu-items">
             <a class="nav-link" href="/admin/customer">
               <span class="menu-icon">

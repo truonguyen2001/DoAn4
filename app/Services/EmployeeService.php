@@ -10,10 +10,7 @@ class EmployeeService
 {
     public function update($id, array $data)
     {
-        if (Auth::check())
-        {
-            $data['updated_by'] = Auth::user()->id;
-        }
+
         $updated = Employee::where('id', $id)
         ->update($data);
         return $updated > 0;

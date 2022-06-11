@@ -1,6 +1,6 @@
 @extends('admin/layout/admin-layout')
 @section('title')
-    Admin - Sản phẩm
+    Admin - Chi tiết sản phẩm
 @endsection
 @section('page-title')
     Danh sách sản phẩm
@@ -112,7 +112,7 @@
             <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel"> @{{ deleting ? 'Xác nhận' : 'Thông tin sản phẩm ' }} </h5>
+                        <h5 class="modal-title" id="staticBackdropLabel"> @{{ deleting ? 'Xác nhận' : 'Sửa sản phẩm ' }} </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
                     </div>
                     <div class="modal-body">

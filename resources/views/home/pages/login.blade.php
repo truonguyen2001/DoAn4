@@ -28,17 +28,17 @@
                 <div class="login-register-wrapper">
                     <div class="login-register-tab-list nav">
                         <a class="active" data-toggle="tab" href="#lg1">
-                            <h4>Đăng ký</h4>
+                            <h4>Đăng nhập</h4>
                         </a>
                         <a data-toggle="tab" href="#lg2">
-                            <h4>Đăng nhập</h4>
+                            <h4>Đăng ký</h4>
                         </a>
                     </div>
                     <div class="tab-content">
                         <div id="lg1" class="tab-pane active">
                             <div class="login-form-container">
                                 <div class="login-register-form">
-                                    <form action="#" method="post">
+                                    <form action="/admin/login" method="get">
                                         <input type="text" name="user-name" placeholder="Tài khoản">
                                         <input type="password" name="user-password" placeholder="Mật khẩu">
                                         <div class="button-box">

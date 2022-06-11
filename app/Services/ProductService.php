@@ -77,8 +77,9 @@ function getAll(
     $query->with('image');
     $query->with('category');
     if ($option['search']) {
-        $query->where('name', 'LIKE', "%" . $option['search'] . "%")
-            ->orWhere('code', 'LIKE', "%" . $option['search'] . "%");
+        $option['search'] = str_replace(' ', '|', $option['search']);
+        $query->where('name', 'RLIKE', $option['search'])
+            ->orWhere('code', 'RLIKE', $option['search']);
     }
     if (isset($option['visible_only'])) {
         $query->where('visible', $option['visible_only'] == "false" ? 0 : 1);

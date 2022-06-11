@@ -29,7 +29,7 @@ class ProductDetailResource extends JsonResource
             'visible' => $this->visible,
             'default_image' => $this->default_image,
             'images' => ImageAssignResource::collection($this->whenLoaded('images')),
-            'default_image' => new BlobResource($this->whenLoaded('image')),
+            'image' => new BlobResource($this->whenLoaded('image')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

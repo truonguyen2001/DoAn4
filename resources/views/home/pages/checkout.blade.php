@@ -37,21 +37,22 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="billing-info mb-20px">
                                 <label>Tên</label>
-                                <input type="text">
+                                <input ng-model="customer.name" type="text">
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="billing-select mb-20px">
                                 <label>Tỉnh</label>
-                                <select style="display: none;">
+                                <select ng-model="customer.town" style="display: none;">
                                     <option>Chọn tỉnh thành</option>
                                     <option>Hà Nội</option>
                                             <option>Hưng Yên</option>
                                             <option>Hải Phòng</option>
                                             <option>Hồ Chí Minh</option>
-                                </select><div class="nice-select" tabindex="0">
+                                </select>
+                                <div class="nice-select" tabindex="0">
                                     <span class="current">Chọn tỉnh thành</span>
-                                    <ul class="list">
+                                    <ul ng-model="customer.town" class="list">
                                         <li data-value="HaNoi" class="option selected">Hà Nội</li>
                                         <li data-value="HungYen" class="option selected">Hưng Yên</li>
                                         <li data-value="HaiPhong" class="option selected">Hải Phòng</li>
@@ -63,26 +64,26 @@
                         <div class="col-lg-12">
                             <div class="billing-info mb-20px">
                                 <label>Quận / Huyện</label>
-                                <input class="billing-address" type="text">
+                                <input ng-model="customer.district" class="billing-address" type="text">
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="billing-info mb-20px">
                                 <label>Xã / Phường </label>
-                                <input type="text">
+                                <input ng-model="customer.commune" type="text">
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="billing-info mb-20px">
                                 <label></label>
-                                <input placeholder="Địa chỉ cụ thể" type="text">
+                                <input  ng-model="customer.address" placeholder="Địa chỉ cụ thể" type="text">
                             </div>
                         </div>
                         
                         <div class="col-lg-6 col-md-6">
                             <div class="billing-info mb-20px">
                                 <label>Số điện thoại</label>
-                                <input type="text">
+                                <input  ng-model="customer.phone" type="text">
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6">
@@ -105,19 +106,18 @@
             </div>
             <div class="col-lg-5">
                 <div class="your-order-area">
-                    <h3>Your order</h3>
+                    <h3>Đơn hàng của bạn</h3>
                     <div class="your-order-wrap gray-bg-4">
                         <div class="your-order-product-info">
                             <div class="your-order-top">
                                 <ul>
-                                    <li>Product</li>
-                                    <li>Total</li>
+                                    <li>Sản phẩm</li>
+                                    <li>Đơn giá</li>
                                 </ul>
                             </div>
                             <div class="your-order-middle">
                                 <ul>
-                                    <li><span class="order-middle-left">Product Name X 1</span> <span class="order-price">$329 </span></li>
-                                    <li><span class="order-middle-left">Product Name X 1</span> <span class="order-price">$329 </span></li>
+                                    <li ng-repeat="c in cart track by $index"><span class="order-middle-left">@{{c.product.product.name}}</span> <span class="order-price"> @{{ c.product.out_price | number }}đ </span></li>
                                 </ul>
                             </div>
                             <div class="your-order-bottom">
@@ -128,66 +128,24 @@
                             </div>
                             <div class="your-order-total">
                                 <ul>
-                                    <li class="order-total">Total</li>
-                                    <li>$329</li>
+                                    <li class="order-total">Tổng tiền</li>
+                                    <li>@{{ totalCart | number }}đ</li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="payment-method">
-                            <div class="payment-accordion element-mrg">
-                                <div class="panel-group" id="accordion">
-                                    <div class="panel payment-accordion">
-                                        <div class="panel-heading" id="method-one">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#method1">
-                                                    Direct bank transfer
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="method1" class="panel-collapse collapse show">
-                                            <div class="panel-body">
-                                                <p>Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel payment-accordion">
-                                        <div class="panel-heading" id="method-two">
-                                            <h4 class="panel-title">
-                                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#method2">
-                                                    Check payments
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="method2" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                <p>Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel payment-accordion">
-                                        <div class="panel-heading" id="method-three">
-                                            <h4 class="panel-title">
-                                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#method3">
-                                                    Cash on delivery
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="method3" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                <p>Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                     <div class="Place-order mt-25">
-                        <a class="btn-hover" href="#">Place Order</a>
+                        <a ng-click="saveInvoice()" class="btn-hover" href="#">Đặt hàng</a>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+    <script src="/assets/home/js/checkoutController.js"></script>
+    <script src="/assets/home/js/appController.js"></script>
 @endsection

@@ -88,41 +88,7 @@
     /*---------------------------
        Best Sell Slider Active
     ------------------------------ */
-    $('.best-sell-slider').owlCarousel({
-            autoplay :   false,
-            loop: false,
-            smartSpeed : 1000,
-            nav :  true ,
-            dots :  false ,
-            margin:30,
-            responsive:{
-                0:{
-                    items:1,
-                    autoplay: true,
-                    loop: true,
-                },
-                360:{
-                    items:1,
-                    autoplay: true,
-                    loop: true,
-                },
-                500:{
-                    items:2,
-                    autoplay: true,
-                    loop: true,
-    
-                },
-                768:{
-                    items:3,
-                },
-                992:{
-                    items:4,
-                },
-                1200:{
-                    items:5,
-                }
-            }
-    })
+
 
 
     /*---------------------------
@@ -408,45 +374,6 @@
     /*---------------------------
        Recent Product Slider Active
     ------------------------------ */
-    $('.recent-product-slider').owlCarousel({
-            autoplay :   false,
-            smartSpeed : 1000,
-            nav :  true ,
-            loop: false,
-            dots :  false ,
-            items:4,
-            margin:30,
-            responsive:{
-                0:{
-                    items:1,
-                    autoplay: true,
-                    loop: true,
-                },
-                360:{
-                    items:1,
-                    autoplay: true,
-                    loop: true,
-                },
-                500:{
-                    items:2,
-                    autoplay: true,
-                    loop: true,
-    
-                },
-                768:{
-                    items:2,
-                },
-                992:{
-                    items:4,
-                },
-                1200:{
-                    items:5,
-                },
-                1300:{
-                    items:6,
-                }
-            }
-    })
 
     /*---------------------------
        Brand Slider Active
@@ -898,34 +825,7 @@
     /*---------------------
         Product dec slider
     --------------------- */
-    $('.product-dec-slider-2').slick({
-        infinite: true,
-        slidesToShow: 4,
-        arrows:false,
-        slidesToScroll: 1,
-        responsive: [{
-                breakpoint: 992,
-                Settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 767,
-                Settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 479,
-                Settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1
-                }
-            }
-        ]
-    });
+   
     /*---------------------
         Product dec slider
     --------------------- */

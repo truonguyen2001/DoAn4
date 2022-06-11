@@ -42,7 +42,8 @@ class CategoryService
         int $page_index = 0,
         int $page_size = 10,
         array $option = []
-    ) {
+    ) 
+    {
         $query = Category::query();
         if (isset($option['search']) && $option['search'] != '') {
             $query->where('name','LIKE', '%'.$option['search'].'%');

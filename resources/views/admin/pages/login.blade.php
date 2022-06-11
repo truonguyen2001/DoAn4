@@ -28,13 +28,14 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{asset('assets/admin/template/ico/apple-touch-icon-114-precomposed.png')}}">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{asset('assets/admin/template/ico/apple-touch-icon-72-precomposed.png')}}">
         <link rel="apple-touch-icon-precomposed" href="{{asset('assets/admin/template/ico/apple-touch-icon-57-precomposed.png')}}">
+        <script src="/assets/angular.min.js"></script>
 
     </head>
 
     <body>
 
         <!-- Top content -->
-        <div class="top-content">
+        <div class="top-content" ng-app="myApp" ng-controller="myController">
             <div class="inner-bg">
                 <div class="container">
                     <div class="row">
@@ -69,17 +70,17 @@
                                 @endif
                                 <!--Show massage end-->
 
-                                <form role="form" action="{{route('admin.login-post')}}" method="post" class="login-form">
+                                <form onsubmit="$event.preventDefault()" ng-submit="login()" role="form" class="login-form">
                                     @csrf
                                     <div class="form-group">
                                         <label class="sr-only" for="form-username">Email</label>
-                                        <input type="text" class="form-username form-control @error('email') is-invalid @enderror"  id="form-username" name="email" placeholder="Email..." required value="{{old('email')}}">
+                                        <input type="text" ng-model="data.email" class="form-username form-control @error('email') is-invalid @enderror"  id="form-username" name="email" placeholder="Email..." required value="{{old('email')}}">
                                     </div>
                                     <div class="form-group">
                                         <label class="sr-only" for="form-password">Password</label>
-                                        <input type="password" class="form-password form-control @error('password') is-invalid @enderror"  id="form-password"  name="password" placeholder="Password..." required>
+                                        <input type="password"  ng-model="data.password" class="form-password form-control @error('password') is-invalid @enderror"  id="form-password"  name="password" placeholder="Password..." required>
                                     </div>
-                                    <button type="submit" class="btn">Đăng nhập</button>
+                                    <button type="button" ng-click="login()" class="btn">Đăng nhập</button>
                                 </form>
 		                    </div>
                         </div>
@@ -95,6 +96,7 @@
         <script src="{{asset('assets/admin/template/bootstrap/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('assets/admin/template/js/jquery.backstretch.min.js')}}"></script>
         <script src="{{asset('assets/admin/template/js/scripts.js')}}"></script>
+        <script src="/assets/admin/js/login.js"></script>
         
         <!--[if lt IE 10]>
             <script src="{{asset('assets/admin/template/js/placeholder.js')}}"></script>

@@ -73,7 +73,7 @@
             <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel"> @{{ deleting ? 'Xác nhận' : 'Thông tin sản phẩm ' }} </h5>
+                        <h5 class="modal-title" id="staticBackdropLabel"> @{{ deleting ? 'Xác nhận' : 'Sửa sản phẩm ' }} </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
                     </div>
                     <div class="modal-body">
@@ -86,7 +86,6 @@
                                     <label for="select" class="form-label fw-bold">Sản phẩm</label>
                                     <select id="select" data-ng-options="o.name for o in products" class="form-select"
                                         data-ng-model="selectedProduct"></select>
-
                                 </div>
                                 <div ng-repeat="f in fields | editable" ng-class="f.type != 'editor' ? 'col-md-6' : ''"
                                     class="form-group mb-3 col-12">

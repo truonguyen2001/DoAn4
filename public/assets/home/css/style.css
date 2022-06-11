@@ -2597,14 +2597,14 @@ ul.dropdown-nav>li>a {
     font-weight: 700;
 
 }
-.count-cart:after {
+.count-cart span {
     position: absolute;
     top: 9px;
     left: -26px;
     right: auto;
     width: 18px;
     height: 18px;
-    content: "2";
+    /* content: "2"; */
     background: #4fb68d;
     color: #fff;
     line-height: 18px;
@@ -2613,10 +2613,10 @@ ul.dropdown-nav>li>a {
     float: right;
 }
 
-.home-cosmatics .count-cart:after{
+.home-cosmatics .count-cart span{
     background-color: #c0b07d;
 }
-.home-furniture .count-cart:after{
+.home-furniture .count-cart span{
     background-color: #ef1e1e;
 }
 .count-cart:before {
@@ -5947,11 +5947,13 @@ a.read-more-btn i {
     margin: 0 40px;
 }
 .zoompro-wrap.zoompro-2 {
-    display: inline-block;
+    display: block;
     position: relative;
-    width: 100%;
+    width: 500px;
     float: left;
     overflow: hidden;
+   margin-left:auto; 
+   margin-right:auto;
 }
 .product-dec-slider-2 .slick-slide img {
     display: inline-block;

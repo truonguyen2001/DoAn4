@@ -27,9 +27,10 @@
     <link rel="stylesheet" href="/assets/home/css/style.css" />
     <!-- ===== Responsive Css Files ===== -->
     <link rel="stylesheet" href="/assets/home/css/responsive.css" />
+    <script src="/assets/angular.min.js"></script>
 </head>
 
-<body>
+<body ng-app="myApp" ng-controller="myController">
     <!--====== PRELOADER PART ENDS ======-->
     <div id="main">
         <!-- Header Start -->
@@ -53,6 +54,7 @@
     <script src="/assets/home/js/plugins/scrollup.js"></script>
     <script src="/assets/home/js/plugins/range-script.js"></script>
     <script src="/assets/home/js/main.js"></script>
+    @yield('scripts')
 </body>
 
 </html>

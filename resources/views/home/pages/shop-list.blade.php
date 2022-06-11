@@ -25,7 +25,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
-
                     <!-- Shop Bottom Area Start -->
                     <div class="shop-bottom-area mt-35">
                         <!-- Shop Tab Content Start -->
@@ -33,21 +32,19 @@
                             <!-- Tab One Start -->
                             <div id="shop-1" class="tab-pane active">
                                 <div class="row">
-                                    @foreach($products as $product)
-                                    <div class="col-md-4 col-sm-6">
-
+                                    <div ng-repeat="item in data" class="col-md-4 col-sm-6">
                                         <article class="list-product">
                                             <div class="img-block">
-                                                <a href="/home/pages/productdetail/{{$product->id}}" class="thumbnail">
-                                                    <img class="first-img" src="{{ '/api/files/' . $product->image->file_path }}" alt="">
-                                                    <img class="second-img" src="{{ '/api/files/' . $product->image->file_path }}" alt="">
+                                                <a href="/home/pages/productdetail/@{{item.id}}" class="thumbnail">
+                                                    <img class="first-img" src="@{{ '/api/files/' + item.image.file_path }}" alt="">
+                                                    <img class="second-img" src="@{{ '/api/files/' + item.image.file_path }}" alt="">
                                                 </a>
                                             </div>
                                             <ul class="product-flag">
                                                 <li class="new">Trả góp 0%</li>
                                             </ul>
                                             <div class="product-decs">
-                                                <h2><a href="/home/pages/productdetail/{{$product->id}}" class="product-link">{{ $product->name }}</a></h2>
+                                                <h2><a href="/home/pages/productdetail/@{{item.id}}" class="product-link">@{{ item.name }}</a></h2>
                                                 <div class="rating-product">
                                                     <i class="ion-android-star"></i>
                                                     <i class="ion-android-star"></i>
@@ -57,14 +54,14 @@
                                                 </div>
                                                 <div class="pricing-meta">
                                                     <ul>
-                                                        <li class="current-price">{{ number_format($product->details->min('out_price'), 0, ',', '.') }} </li></li>
+                                                        <li class="current-price">@{{ item.min_price | number }}đ</li></li>
                                                         <li class="discount-price">New</li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <div class="add-to-link">
                                                 <ul>
-                                                    <li class="cart"><a class="cart-btn" href="#">ADD TO CART </a></li>
+                                                    <li class="cart"><a class="cart-btn" ng-click="addCart(item.default_detail)" href="#"><i class="fa fa-shopping-cart"></i> </a></li>
                                                     <li>
                                                         <a href="wishlist.html"><i class="ion-android-favorite-outline"></i></a>
                                                     </li>
@@ -74,16 +71,14 @@
                                                 </ul>
                                             </div>
                                         </article>
-
                                     </div>
-                                    @endforeach
                                 </div>
                             </div>
                             <!-- Tab One End -->
                         </div>
                         <!-- Shop Tab Content End -->
                         <!--  Pagination Area Start -->
-                        <div class="pro-pagination-style text-center">
+                        {{-- <div class="pro-pagination-style text-center">
                             <ul>
                                 <li>
                                     <a class="prev" href="#"><i class="ion-ios-arrow-left"></i></a>
@@ -94,7 +89,7 @@
                                     <a class="next" href="#"><i class="ion-ios-arrow-right"></i></a>
                                 </li>
                             </ul>
-                        </div>
+                        </div> --}}
                         <!--  Pagination Area End -->
                     </div>
                     <!-- Shop Bottom Area End -->
@@ -102,4 +97,8 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script src="/assets/home/js/productExtend.js"></script>
+    <script src="/assets/home/js/appController.js"></script>
 @endsection

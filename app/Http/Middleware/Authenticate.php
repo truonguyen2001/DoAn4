@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\UnauthorizedException;
 
 class Authenticate extends Middleware
 {
@@ -14,17 +15,17 @@ class Authenticate extends Middleware
      * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
-    // protected function redirectTo($request)
-    // {
-    //     if (! $request->expectsJson()) {
-    //         return route('login');
-    //     }
-    // }
+    protected function redirectTo($request)
+    {
+        if (!Auth::check()) {
+            return route('admin.login');
+        }
+    }
     public function handle($request, Closure $next, ...$guards)
     {
         if (!auth()->check())
         {
-            abort(403);
+            return redirect(route('admin.login'));
         }
         return $next($request);
     }

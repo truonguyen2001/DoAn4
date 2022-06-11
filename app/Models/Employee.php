@@ -12,15 +12,13 @@ class Employee extends Model
     public const RULES = [
         'name' => 'required'
     ];
-    protected $table = 'employee';
+    protected $table = 'employees';
 
     protected $fillable = [
         'name',
         'address',
         'phone_number',
-        'sex',
-        'birth',
-        'email',
-        'rank'
+        'date',       
+        'sex'
     ];
 }

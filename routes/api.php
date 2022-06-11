@@ -45,7 +45,7 @@ Route::middleware([])->prefix('admin')->group(function () {
     Route::resource('customer', CustomerApiController::class)->except(['edit', 'create']);
     Route::resource('employee', EmployeeApiController::class)->except(['edit', 'create']);
     Route::resource('product-details', ProductDetailApiController::class)->except(['edit', 'create']);
-    Route::resource('invoice', InvoiceApiController::class)->except(['edit', 'create']);
+    Route::resource('invoices', InvoiceApiController::class)->except(['edit', 'create']);
     Route::resource('invoice-details', InvoiceDetailApiController::class)->except(['edit', 'create']);
     Route::resource('carts', CartApiController::class)->except(['edit', 'create']);
     Route::post('carts/{id}', [CartApiController::class, 'checkOut'])->name('carts.checkout');

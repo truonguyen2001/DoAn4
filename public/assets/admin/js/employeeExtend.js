@@ -1,13 +1,11 @@
-const route = "employees";
+const route = "employee";
 extendController = ($scope, $http) => {
-    $scope.baseUrl = "https://localhost:44394";
     $scope.fields = [
         { field: "name", display: "Tên nhân viên", default: "", type: "text" },
-        { field: "birth", display: "Năm sinh", default: "", type: "year" },
+        { field: "date", display: "Năm sinh", default: "", type: "year" },
         { field: "sex", display: "Giới tính", default: "", type: "text" },
         { field: "phone_number", display: "Số điện thoại", default: "", type: "text" },
         { field: "address", display: "Địa chỉ", default: "", type: "text" },
-        // { field: "email", display: "Email", default: "", type: "email" },
         // { field: "rank", display: "Chức vụ", default: "", type: "text" },
     ];
     $scope.item = {};

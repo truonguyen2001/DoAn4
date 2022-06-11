@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Blob;
 use App\Models\Product;
-use App\Models\Provider;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;
@@ -71,9 +70,13 @@ class AdminController extends Controller
     {
         return view('admin/pages/providers');
     }
-    public function Invoices(Request $request)
+    public function Invoice(Request $request)
     {
-        return view('admin/pages/invoice;');
+        return view('admin/pages/invoice');
+    }
+    function  InvoiceDetails(Request $request)
+    {
+        return view('admin/pages/invoice-detail');
     }
     public function Customer(Request $request)
     {

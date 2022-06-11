@@ -1,6 +1,5 @@
 const route = "providers";
 extendController = ($scope, $http) => {
-    $scope.baseUrl = "https://localhost:44394";
     $scope.fields = [
         { field: "name", display: "Tên nhà cung cấp", default: "", type: "text" },
         { field: "phone_number", display: "Số điện thoại", default: "", type: "text" },

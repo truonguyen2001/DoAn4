@@ -1,87 +1,12 @@
-const route = "product-details";
+const route = "invoice-detail";
 extendController = ($scope, $http) => {
     // $scope.name = '';
     // $scope.visible = true;
-    $scope.fields = [
-        {
-            hidden: false,
-            field: "product.name",
-            display: "Tên sản phẩm",
-            default: "",
-            type: "text",
-            readonly: true,
-        },
-        // {
-        //     hidden: false,
-        //     field: "color",
-        //     display: "Màu sắc",
-        //     default: "",
-        //     type: "text",
-        // },
-        // {
-        //     hidden: false,
-        //     field: "size",
-        //     display: "Kích thước",
-        //     default: "",
-        //     type: "text",
-        // },
-        // {
-        //     hidden: false,
-        //     field: "parameter",
-        //     display: "Thông số",
-        //     default: "",
-        //     type: "text",
-        // },
-        {
-            hidden: false,
-            field: "in_price",
-            display: "Giá nhập",
-            default: 0,
-            type: "number",
-        },
-        {
-            hidden: false,
-            field: "out_price",
-            display: "Giá bán",
-            default: 0,
-            type: "number",
-        },
-        {
-            hidden: false,
-            field: "remaining_quantity",
-            display: "Số lượng còn",
-            default: "",
-            type: "text",
-        },
-        {
-            hidden: false,
-            field: "default_image.file_path",
-            display: "Ảnh",
-            default: "",
-            type: "file",
-            readonly: false,
-        },
-        {
-            hidden: false,
-            field: "unit",
-            display: "ĐVT",
-            default: "",
-            type: "text",
-        },
-        {
-            hidden: false,
-            field: "total_quantity",
-            display: "Tổng số",
-            default: 0,
-            type: "text",
-        },
-        {
-            hidden: false,
-            field: "visible",
-            display: "Hiển thị",
-            default: true,
-            type: "checkbox",
-        },
+    $scope.fields = [        
+        { hidden: false, field: "invoice_id", display: "Mã hóa đơn", default: 0, type: "int", },
+        { hidden: false, field: "product_detail_id", display: "Mã sản phẩm", default: "", type: "int", readonly: true, },
+        { hidden: false, field: "quantity", display: "Số lượng", default: "", type: "text", },
+        { hidden: false, field: "price", display: "Đơn giá", default: "", type: "text", },
     ];
     $scope.id = 0;
     $scope.item = {};
@@ -106,15 +31,15 @@ extendController = ($scope, $http) => {
         $scope.deleting = false;
     };
 
-    $scope.showAddNew = () => {
-        for (let field of $scope.fields.filter((v) => !v.readonly)) {
-            $scope.item[field.field] = field.default;
-        }
-        const file = document.getElementById("default_image.file_path");
-        if (file != null) value = "";
-        $scope.editting = false;
-        $scope.deleting = false;
-    };
+    // $scope.showAddNew = () => {
+    //     for (let field of $scope.fields.filter((v) => !v.readonly)) {
+    //         $scope.item[field.field] = field.default;
+    //     }
+    //     const file = document.getElementById("default_image.file_path");
+    //     if (file != null) value = "";
+    //     $scope.editting = false;
+    //     $scope.deleting = false;
+    // };
     $scope.save = () => {
         const fileE = document.getElementById("default_image.file_path");
         let file;

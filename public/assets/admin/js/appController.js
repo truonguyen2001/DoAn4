@@ -1,4 +1,7 @@
 "use strict";
+if (!localStorage.getItem("token")) {
+    window.location.href = "/admin/login";
+}
 
 var extendController;
 const app = angular.module("myApp", []);
@@ -14,24 +17,13 @@ app.controller("myController", function ($scope, $http) {
     $scope.searchValue = "";
     $scope.deleting = false;
     $scope.extendQuerys = "";
-    $scope.baseUrl = "";
+    //$scope.baseUrl = "";
+    $scope.baseUrl = "https://localhost:44394";
     if (extendController) {
         extendController($scope, $http);
     }
     $scope.getList = () => {
-        const url = $scope.baseUrl + `/api/admin/${route}?page=${
-            $scope.page
-        }&limit=${
-            $scope.limit
-        }&column=${
-            $scope.column
-        }&sort=${
-            $scope.sort
-        }&search=${
-            $scope.searchValue
-        }&${
-            $scope.extendQuerys
-        }`;
+        const url = `/api/admin/${route}?page=${$scope.page}&limit=${$scope.limit}&column=${$scope.column}&sort=${$scope.sort}&search=${$scope.searchValue}&${$scope.extendQuerys}`;
         $http.get(url).then((res) => {
             if (res.data.status == true) {
                 $scope.data = res.data.data;
@@ -45,14 +37,12 @@ app.controller("myController", function ($scope, $http) {
 
         return $http.post(uploadUrl, fd, {
             transformRequest: angular.identity,
-            headers: {
-                "Content-Type": undefined
-            }
+            headers: { "Content-Type": undefined },
         });
     };
 
     $scope.getById = (id) => {
-        const url = $scope.baseUrl + `/api/admin/${route}/${id}`;
+        const url = `/api/admin/${route}/${id}`;
         $http.get(url).then((res) => {
             if (res.data.status == true) {
                 const index = $scope.data.findIndex((v) => v.id == id);
@@ -64,7 +54,7 @@ app.controller("myController", function ($scope, $http) {
     };
 
     $scope.update = (id, item) => {
-        const url = $scope.baseUrl + `/api/admin/${route}/${id}`;
+        const url = `/api/admin/${route}/${id}`;
         $http.patch(url, item).then((res) => {
             if (res.data.status == true) {
                 $scope.getList();
@@ -73,15 +63,16 @@ app.controller("myController", function ($scope, $http) {
     };
 
     $scope.create = (item) => {
-        const url = $scope.baseUrl + `/api/admin/${route}`;
+        const url = `/api/admin/${route}`;
         $http.post(url, item).then((res) => {
             if (res.data.status == true) {
                 $scope.getList();
             }
         });
     };
+
     $scope.delete = (id) => {
-        const url = $scope.baseUrl + `/api/admin/${route}/${id}`;
+        const url = `/api/admin/${route}/${id}`;
         $http.delete(url).then((res) => {
             if (res.data.status == true) {
                 $scope.getList();
@@ -100,7 +91,8 @@ app.controller("myController", function ($scope, $http) {
             $scope.column = column;
         } else {
             $scope.sort = $scope.sort == "asc" ? "desc" : "asc";
-        } $scope.getList();
+        }
+        $scope.getList();
     };
     $scope.getList();
 
@@ -114,9 +106,7 @@ app.filter("page", function () {
         perPage = parseInt(perPage);
         limit = parseInt(limit);
         page -= 2;
-        if (page < 1) 
-            page = 1;
-        
+        if (page < 1) page = 1;
         for (let i = 0; i < limit && (i + page - 1) * perPage <= total; i++) {
             input.push(i + page);
         }
@@ -126,13 +116,16 @@ app.filter("page", function () {
 
 app.filter("editable", function () {
     return function (input) {
-        input = input.filter((v) => v.readonly == undefined || v.readonly == false);
+        input = input.filter(
+            (v) => v.readonly == undefined || v.readonly == false
+        );
         return input;
     };
 });
 
 app.directive("fileModel", [
-    "$parse", function ($parse) {
+    "$parse",
+    function ($parse) {
         return {
             restrict: "A",
             link: function (scope, element, attrs) {
@@ -144,7 +137,7 @@ app.directive("fileModel", [
                         modelSetter(scope, element[0].files[0]);
                     });
                 });
-            }
+            },
         };
     },
 ]);
@@ -174,4 +167,32 @@ app.config(function ($sceProvider) {
     // Completely disable SCE.  For demonstration purposes only!
     // Do not use in new projects or libraries.
     $sceProvider.enabled(false);
+});
+app.factory("BearerAuthInterceptor", function ($window, $q) {
+    return {
+        request: function (config) {
+            config.headers = config.headers || {};
+            const token = $window.localStorage.getItem("token");
+            if (token) {
+                config.headers.Authorization = "Bearer " + token;
+            }
+            return config || $q.when(config);
+        },
+        response: function (response) {
+            return response || $q.when(response);
+        },
+        responseError: function(res) {
+            if (res.status === 401) {
+                localStorage.removeItem("token");
+                window.location.href = "/admin/login";
+            }
+
+            return res;
+        }
+    };
+});
+
+// Register the previously created AuthInterceptor.
+app.config(function ($httpProvider) {
+    $httpProvider.interceptors.push("BearerAuthInterceptor");
 });

@@ -23,20 +23,26 @@ $categories = Category::all();
                                 <a href="/home">Home </a>
                             </li>
                             <li class="menu-dropdown">
-                                <a href="#">Sản phẩm <i class="ion-ios-arrow-down"></i></a>
+                                <a href="/home/pages/shop">Sản phẩm <i class="ion-ios-arrow-down"></i></a>
                                 <ul class="mega-menu-wrap">
                                     @foreach ($categories as $key => $item)
                                         @if ($key % 5 == 0)
                                             <li>
                                                 <ul>
                                                     {{-- <li class="mega-menu-title"><a href="#">Shop Grid</a></li> --}}
-                                                    <li><a href="{{ route('shop-list', ['id' => $item->id]) }}">{{ $item->name }}</a></li>
-                                        @elseif ($key % 5 == 4 || $key == count($categories) - 1)
-                                                <li><a href="{{ route('shop-list', ['id' => $item->id]) }}">{{ $item->name }}</a></li>
+                                                    <li><a
+                                                            href="{{ route('shop-list', ['id' => $item->id]) }}">{{ $item->name }}</a>
+                                                    </li>
+                                                @elseif ($key % 5 == 4 || $key == count($categories) - 1)
+                                                    <li><a
+                                                            href="{{ route('shop-list', ['id' => $item->id]) }}">{{ $item->name }}</a>
+                                                    </li>
                                                 </ul>
                                             </li>
                                         @else
-                                            <li><a href="{{ route('shop-list', ['id' => $item->id]) }}">{{ $item->name }}</a></li>
+                                            <li><a
+                                                    href="{{ route('shop-list', ['id' => $item->id]) }}">{{ $item->name }}</a>
+                                            </li>
                                         @endif
                                     @endforeach
                                 </ul>
@@ -51,7 +57,7 @@ $categories = Category::all();
                             </li>
                             <li class="menu-dropdown">
                                 <a href="#">Blog <i class="ion-ios-arrow-down"></i></a>
-                                <ul class="sub-menu">
+                                {{-- <ul class="sub-menu">
                                     <li class="menu-dropdown position-static">
                                         <a href="#">Blog Grid <i class="ion-ios-arrow-down"></i></a>
                                         <ul class="sub-menu sub-menu-2">
@@ -59,23 +65,7 @@ $categories = Category::all();
                                             <li><a href="blog-grid-right-sidebar.html">Blog Grid Right Sidebar</a></li>
                                         </ul>
                                     </li>
-                                    <li class="menu-dropdown position-static">
-                                        <a href="#">Blog List <i class="ion-ios-arrow-down"></i></a>
-                                        <ul class="sub-menu sub-menu-2">
-                                            <li><a href="blog-list-left-sidebar.html">Blog List Left Sidebar</a></li>
-                                            <li><a href="blog-list-right-sidebar.html">Blog List Right Sidebar</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-dropdown position-static">
-                                        <a href="#">Blog Single <i class="ion-ios-arrow-down"></i></a>
-                                        <ul class="sub-menu sub-menu-2">
-                                            <li><a href="blog-single-left-sidebar.html">Blog Single Left Sidebar</a>
-                                            </li>
-                                            <li><a href="blog-single-right-sidebar.html">Blog Single Right Sidebar</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                                </ul> --}}
                             </li>
                             <li><a href="/home/pages/contact">Liên hệ</a></li>
                         </ul>
@@ -87,9 +77,8 @@ $categories = Category::all();
                         <div class="header_account_list search_list">
                             <a href="javascript:void(0)"><i class="ion-ios-search-strong"></i></a>
                             <div class="dropdown_search">
-                                <form action="#">
-                                    <input placeholder="Search entire store here ..." type="text" />
-
+                                <form ng-submit="search(searchInputValue)">
+                                    <input placeholder="Search entire store here ..." ng-model="searchInputValue" type="text" />
                                     <button type="submit"><i class="ion-ios-search-strong"></i></button>
                                 </form>
                             </div>
@@ -106,46 +95,35 @@ $categories = Category::all();
                         <!--Cart info Start -->
                         <div class="cart-info d-flex">
                             <div class="mini-cart-warp">
-                                <a href="#" class="count-cart"><span></span></a>
-                                <div class="mini-cart-content">
+                                <a href="#" class="count-cart"><span>@{{ cart.length }}</span></a>
+                                <div style="max-height: 90vh; overflow: scroll;" class="mini-cart-content">
                                     <ul>
-                                        <li class="single-shopping-cart">
+                                        <li ng-repeat="c in cart track by $index" class="single-shopping-cart">
                                             <div class="shopping-cart-img">
-                                                <a href="single-product.html"><img alt=""
-                                                        src="/assets/home/images/product-image/mini-cart/1.jpg" /></a>
-                                                <span class="product-quantity">1x</span>
+                                                <a href="single-product.html">
+                                                    <img class="w-100" ng-if="c.product.image" alt=""
+                                                        src="@{{ baseUrl + '/api/files/' + c.product.image.file_path }}" /></a>
+                                                <img class="w-100" ng-if="!c.product.image" alt=""
+                                                    src="@{{ baseUrl + '/api/files/' + c.product.product.image.file_path }}" /></a>
+                                                <span class="product-quantity">@{{ c.quantity }}</span>
                                             </div>
                                             <div class="shopping-cart-title">
-                                                <h4><a href="single-product.html">Juicy Couture...</a></h4>
-                                                <span>$9.00</span>
+                                                <h4><a href="single-product.html">@{{ c.product.product.name }}</a></h4>
+                                                <span>@{{ c.product.out_price | number }}đ</span>
                                                 <div class="shopping-cart-delete">
-                                                    <a href="#"><i class="ion-android-cancel"></i></a>
+                                                    <a href="#"><i ng-click="deleteCart(c.product, c.quantity)" class="ion-android-cancel"></i></a>
                                                 </div>
                                             </div>
-                                        </li>
-                                        <li class="single-shopping-cart">
-                                            <div class="shopping-cart-img">
-                                                <a href="single-product.html"><img alt=""
-                                                        src="/assets/home/images/product-image/mini-cart/2.jpg" /></a>
-                                                <span class="product-quantity">1x</span>
-                                            </div>
-                                            <div class="shopping-cart-title">
-                                                <h4><a href="single-product.html">Water and Wind...</a></h4>
-                                                <span>$11.00</span>
-                                                <div class="shopping-cart-delete">
-                                                    <a href="#"><i class="ion-android-cancel"></i></a>
-                                                </div>
-                                            </div>
+                                            
                                         </li>
                                     </ul>
                                     <div class="shopping-cart-total">
-                                        <h4>Subtotal : <span>$20.00</span></h4>
-                                        <h4>Shipping : <span>$7.00</span></h4>
-                                        <h4>Taxes : <span>$0.00</span></h4>
-                                        <h4 class="shop-total">Total : <span>$27.00</span></h4>
+                                        <h4>Đơn giá : <span>@{{ totalCart | number }}đ</span></h4>
+                                        <h4>Phí ship : <span>0đ</span></h4>
+                                        <h4 class="shop-total">Tổng tiền : <span>@{{ totalCart | number }}đ</span></h4>
                                     </div>
                                     <div class="shopping-cart-btn text-center">
-                                        <a class="default-btn" href="checkout.html">checkout</a>
+                                        <a class="default-btn" href="home/pages/checkout">Thanh toán</a>
                                     </div>
                                 </div>
                             </div>

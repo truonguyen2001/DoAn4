@@ -13,10 +13,7 @@ class Invoice extends AuditedEntity {
     // public int $status;
 
     public const RULES = [
-        'customer_id' => 'required_unless:customer_name',
-        'customer_name' => 'required_unless:customer_id',
-        'address' => 'required_unless:customer_id',
-        'phone_number' => 'required_unless:customer_id'
+        
     ];
 
     protected $fillable = [

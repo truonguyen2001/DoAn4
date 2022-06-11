@@ -1,6 +1,5 @@
-const route = "Categories";
+const route = "categories";
 extendController = ($scope, $http) => {
-    $scope.baseUrl = "https://localhost:44394";
     $scope.fields = [
         { field: "name", display: "Tên loại", default: "", type: "text" },
         {

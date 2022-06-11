@@ -1,12 +1,10 @@
-const route = "customers";
+const route = "customer";
 extendController = ($scope, $http) => {
-    $scope.baseUrl = "https://localhost:44394";
     $scope.fields = [
         { field: "name", display: "Tên khách hàng", default: "", type: "text" },
         { field: "address", display: "Địa chỉ", default: "", type: "text" },
         { field: "phone_number", display: "Số ĐT", default: "", type: "text" },
         { field: "debt", display: "Số tiền nợ",readonly:true, default: "", type: "int" },
-        //{ field: "birth", display: "Ngày sinh", default: "", type: "date" },
         { field: "bank_number", display: "Số tài khoản", default: "", type: "text" },
         { field: "bank_name", display: "Tên tài khoản", default: "", type: "text" },
     ];

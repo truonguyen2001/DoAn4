@@ -113,7 +113,6 @@ class EmployeeApiController extends Controller
         try {
             $data = $request->all();
             $rules = Employee::RULES;
-            $rules['name'] .= ',name,' . $id;
             $validator = Validator::make($data,  $rules);
             if ($validator->fails()) {
                 $response = response()->json([
@@ -123,7 +122,6 @@ class EmployeeApiController extends Controller
                     'message' => 'Failed'
                 ]);
             } else {
-                $data['last_updated_by'] = 20;
                 $result = $this->employee_service->update($id, $data);
                 $response = response()->json([
                     'code' => Response::HTTP_OK,

@@ -3,7 +3,7 @@
     Admin - Loại sản phẩm
 @endsection
 @section('page-title')
-    Danh sách loại sản phẩm
+    Loại sản phẩm
 @endsection
 @section('main-content')
     <div ng-app="myApp" ng-controller="myController">
@@ -25,7 +25,7 @@
             <thead>
                 <tr>
                     <th scope="col">STT</th>
-                    <th style="cursor: pointer;" ng-repeat="f in fields | visible" ng-click="order(f.field)" scope="col">
+                    <th style="cursor: pointer;" ng-repeat="f in fields | visible" ng-click="order(f)" scope="col">
                         @{{ f.display }}
                     </th>
                     <th style="cursor: default;"></th>
@@ -39,7 +39,7 @@
                         <input ng-if='f.type == "checkbox"' ng-model="item[f.field]" type="checkbox"  onclick="return false;">
                         <div ng-bind-html="item[f.field]" ng-if="f.type == 'editor'" class="ql-contaienr">
                         </div>
-                        <img height="100" ng-if="f.type == 'file'" src="/api/files/@{{ item | value: f.field }}" />
+                        <img height="100" ng-if="f.type == 'file'" src="@{{baseUrl}}/api/files/@{{ item | value: f.field }}" />
                     </td>
                     <td>
                         <button ng-click="showEdit(item)" type="button" class="btn btn-info m-1" data-bs-toggle="modal"

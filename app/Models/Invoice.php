@@ -26,6 +26,24 @@ class Invoice extends AuditedEntity {
         'phone_number'
     ];
 
+    public static function getStatusName(int $status)
+    {
+        switch ($status) {
+            case 0:
+                return "Đang duyệt";
+            case 1:
+                return "Đã duyệt";
+            case 2:
+                return "Đang giao";
+            case 3:
+                return "Từ chối";
+            case 4:
+                return "Hoàn thành";
+            default:
+                return "Đang duyệt";
+        }
+    }
+
     public function details()
     {
         return $this->hasMany(InvoiceDetail::class, 'invoice_id', 'id');

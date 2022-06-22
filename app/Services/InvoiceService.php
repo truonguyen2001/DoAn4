@@ -10,7 +10,6 @@ class InvoiceService
 {
     public function __construct(CustomerService $customer_service)
     {
-        $this->customer_service = $customer_service;
     }
     public function refresh($id)
     {
@@ -21,7 +20,6 @@ class InvoiceService
             ->where('invoice_id',$invoice->id)
             ->sum('quantity*price');
             $invoice->save();
-            $this->customer_service->refresh($invoice->customer_id);    
         }
     }
 
@@ -32,8 +30,6 @@ class InvoiceService
         ->update($data);
         if ($invoice->customer_id != $data['customer_id'])
         {
-            $this->customer_service->refresh($data['customer_id']);
-            $this->customer_service->refresh($invoice->customer_id );
         }
         return $updated > 0;
     }
@@ -44,7 +40,6 @@ class InvoiceService
         if ($invoice)
         {
             $deleted = Invoice::destroy($id);
-            $this->customer_service->refresh($invoice->customer_id);
         }
         return $deleted;
     }
@@ -56,7 +51,6 @@ class InvoiceService
             : $data;
         if($invoice->save()) 
         {
-            $this->customer_service->refresh($invoice->customer_id);
             return $invoice->id;
         }
         else return 0;
@@ -71,8 +65,8 @@ class InvoiceService
         $query = Invoice::query();
         if ($option['with_detail'] == 'true') {
             $query->with('details.productDetail');
-            $query->with('customer');
         }
+        $query->with('customer');
         // if ($option['search']) {
         //     $query->where('name', 'LIKE', "%".$option['search']."%")
         //     ->orWhere('code', 'LIKE', "%".$option['search']."%");

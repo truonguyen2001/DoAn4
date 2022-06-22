@@ -9,8 +9,9 @@ extendController = function ($scope, $http, $location) {
         $http.get(baseUrl + "/api/admin/products/" + productId).then((res) => {
             if (res.data.status == true) {
                 $scope.product = res.data.data;
-                $scope.search($scope.product.name);
                 $scope.href = $scope.product.name;
+                if ($scope.product?.category_id) $scope.extendQuerys = "category=" + $scope.product.category_id;
+                $scope.getList();
                 $scope.detail = $scope.product.details.find(
                     (d) => d.out_price == $scope.product.min_price
                 );
@@ -48,10 +49,6 @@ extendController = function ($scope, $http, $location) {
         });
     }
     $scope.categories = [];
-    {
-        const categoryId = params.category;
-        if (categoryId) $scope.extendQuerys = "category=" + categoryId;
-    }
     $scope.quantity = 1;
     $scope.page = 1;
     $scope.limit = 5;

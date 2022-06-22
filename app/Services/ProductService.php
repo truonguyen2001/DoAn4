@@ -45,60 +45,60 @@ class ProductService
         $product = is_array($data) ?
             Product::create($data)
             : $data;
-        if($product->save()) return $product->id;
+        if ($product->save()) return $product->id;
         else return 0;
     }
 
-public
-function getAll(
-    array $orderBy = [],
-    int $page_index = 0,
-    int $page_size = 10,
-    array $option = []
-)
-{
-    $query = Product::query();
-    if ($option['consumableOnly'] == 'true') {
-        $query->where('quantity', '>', '0');
-    }
-    if ($option['with_images'] == 'true') {
-        $query->with('images.blob');
-    }
-    if ($option['with_detail'] == 'true') {
+    public function getAll(
+        array $orderBy = [],
+        int $page_index = 0,
+        int $page_size = 10,
+        array $option = []
+    ) {
+        $query = Product::query();
         if ($option['consumableOnly'] == 'true') {
-            $query->with(['details' => function ($q) {
-                $q->where('remaining_quantity', '>', '0');
-            }]);
-        } else {
-            $query->with('details');
+            $query->where('quantity', '>', '0');
         }
+        if ($option['with_images'] == 'true') {
+            $query->with('images.blob');
+        }
+        if ($option['with_detail'] == 'true') {
+            if ($option['consumableOnly'] == 'true') {
+                $query->with(['details' => function ($q) {
+                    $q->where('remaining_quantity', '>', '0');
+                }]);
+            } else {
+                $query->with('details');
+            }
+            $query->with('details.image');
+        }
+        $query->with('image');
+        $query->with('category');
+        if (isset($option['category']) && $option['category'] != null) {
+            $query->where('category_id', '=', $option['category']);
+        }
+        if ($option['search']) {
+            $option['search'] = str_replace(' ','.*',$option['search']);
+            $query->where('name', 'RLIKE', $option['search'])
+                ->orWhere('code', 'RLIKE', $option['search']);
+        }
+        if ($option['visible_only'] != null &&  $option['visible_only'] == "true") {
+            $query->where('visible', 1);
+        }
+        if ($orderBy) {
+            $query->orderBy($orderBy['column'], $orderBy['sort']);
+        }
+        $query->orderBy('id', 'desc');
+        return ProductResource::collection($query->paginate($page_size, page: $page_index));
+    }
+
+    public function getById(int $id)
+    {
+        $query = Product::query();
         $query->with('details.image');
-    }
-    $query->with('image');
-    $query->with('category');
-    if ($option['search']) {
-        $option['search'] = str_replace(' ', '|', $option['search']);
-        $query->where('name', 'RLIKE', $option['search'])
-            ->orWhere('code', 'RLIKE', $option['search']);
-    }
-    if (isset($option['visible_only'])) {
-        $query->where('visible', $option['visible_only'] == "false" ? 0 : 1);
-    }
-    if ($orderBy) {
-        $query->orderBy($orderBy['column'], $orderBy['sort']);
-    }
-    $query->orderBy('id', 'desc');
-    return ProductResource::collection($query->paginate($page_size, page: $page_index));
-    }
+        $query->with('images.blob');
+        $query->with('image');
 
-public
-function getById(int $id)
-{
-    $query = Product::query();
-    $query->with('details.image');
-    $query->with('images.blob');
-    $query->with('image');
-
-    return new ProductResource($query->find($id));
-}
+        return new ProductResource($query->find($id));
+    }
 }

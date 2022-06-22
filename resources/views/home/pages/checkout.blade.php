@@ -28,37 +28,16 @@
                 <div class="billing-info-wrap">
                     <h3>Chi tiết thanh toán</h3>
                     <div class="row">
-                        <div class="col-lg-6 col-md-6">
+                        <div class="col-lg-12">
                             <div class="billing-info mb-20px">
-                                <label>Họ</label>
-                                <input type="text">
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <div class="billing-info mb-20px">
-                                <label>Tên</label>
+                                <label>Họ & Tên</label>
                                 <input ng-model="customer.name" type="text">
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="billing-select mb-20px">
                                 <label>Tỉnh</label>
-                                <select ng-model="customer.town" style="display: none;">
-                                    <option>Chọn tỉnh thành</option>
-                                    <option>Hà Nội</option>
-                                            <option>Hưng Yên</option>
-                                            <option>Hải Phòng</option>
-                                            <option>Hồ Chí Minh</option>
-                                </select>
-                                <div class="nice-select" tabindex="0">
-                                    <span class="current">Chọn tỉnh thành</span>
-                                    <ul ng-model="customer.town" class="list">
-                                        <li data-value="HaNoi" class="option selected">Hà Nội</li>
-                                        <li data-value="HungYen" class="option selected">Hưng Yên</li>
-                                        <li data-value="HaiPhong" class="option selected">Hải Phòng</li>
-                                        <li data-value="HoChiMinh" class="option selected">Hồ Chí Minh</li>
-                                    </ul>
-                                </div>
+                                <input ng-model="customer.province" class="billing-address" type="text">
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -117,7 +96,7 @@
                             </div>
                             <div class="your-order-middle">
                                 <ul>
-                                    <li ng-repeat="c in cart track by $index"><span class="order-middle-left">@{{c.product.product.name}}</span> <span class="order-price"> @{{ c.product.out_price | number }}đ </span></li>
+                                    <li ng-repeat="c in cart track by $index"><span class="order-middle-left">@{{c.product.product.name}}</span> <span class="order-price"> @{{ c.product.out_price | number }}VND </span></li>
                                 </ul>
                             </div>
                             <div class="your-order-bottom">
@@ -129,7 +108,7 @@
                             <div class="your-order-total">
                                 <ul>
                                     <li class="order-total">Tổng tiền</li>
-                                    <li>@{{ totalCart | number }}đ</li>
+                                    <li>@{{ totalCart | number }}VND</li>
                                 </ul>
                             </div>
                         </div>

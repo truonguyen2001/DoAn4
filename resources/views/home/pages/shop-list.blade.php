@@ -54,7 +54,12 @@
                                                 </div>
                                                 <div class="pricing-meta">
                                                     <ul>
-                                                        <li class="current-price">@{{ item.min_price | number }}đ</li></li>
+                                                        <li class="old-price">
+                                                            @{{ item.min_price *1.05 | number }}VND
+                                                        </li>
+                                                        <li class="current-price">
+                                                            @{{ item.min_price | number }}VND
+                                                        </li>
                                                         <li class="discount-price">New</li>
                                                     </ul>
                                                 </div>
@@ -76,21 +81,6 @@
                             </div>
                             <!-- Tab One End -->
                         </div>
-                        <!-- Shop Tab Content End -->
-                        <!--  Pagination Area Start -->
-                        {{-- <div class="pro-pagination-style text-center">
-                            <ul>
-                                <li>
-                                    <a class="prev" href="#"><i class="ion-ios-arrow-left"></i></a>
-                                </li>
-                                <li><a class="active" href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li>
-                                    <a class="next" href="#"><i class="ion-ios-arrow-right"></i></a>
-                                </li>
-                            </ul>
-                        </div> --}}
-                        <!--  Pagination Area End -->
                     </div>
                     <!-- Shop Bottom Area End -->
                 </div>

@@ -46,13 +46,13 @@
                                             src="@{{ baseUrl + '/api/files/' + c.product.image.file_path }}" ></a>
                                     </td>
                                     <td class="product-name">@{{ c.product.product.name }}</td>
-                                    <td class="product-price-cart"><span class="amount">@{{ c.product.out_price | number }}đ</span></td>
+                                    <td class="product-price-cart"><span class="amount">@{{ c.product.out_price | number }}VND</span></td>
                                     <td class="product-quantity">
                                         <div class="cart-plus-minus"><div class="dec qtybutton">-</div>
                                             <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1">
                                         <div class="inc qtybutton">+</div></div>
                                     </td>
-                                    <td class="product-subtotal">@{{ c.product.out_price | number }}đ</td>
+                                    <td class="product-subtotal">@{{ c.product.out_price | number }}VND</td>
                                     <td class="product-remove">
                                         <a href="#"><i class="fa fa-pencil-alt"></i></a>
                                         <a href="#"><i ng-click="deleteCart(c.product, c.quantity)" class="fa fa-times"></i></a>
@@ -150,15 +150,15 @@
                             <div class="title-wrap">
                                 <h4 class="cart-bottom-title section-bg-gary-cart">Tổng giỏ hàng</h4>
                             </div>
-                            <h5>Tổng giá trị đơn hàng <span>@{{ totalCart | number }}đ</span></h5>
+                            <h5>Tổng giá trị đơn hàng <span>@{{ totalCart | number }}VND</span></h5>
                             <div class="total-shipping">
                                 <h5>Tổng phí giao hàng</h5>
                                 <ul>
-                                    <li><input type="checkbox"> Standard <span>0 VNĐ</span></li>
-                                    <li><input type="checkbox"> Express <span>0 VNĐ</span></li>
+                                    <li><input type="checkbox"> Standard <span>0 VND</span></li>
+                                    <li><input type="checkbox"> Express <span>0 VND</span></li>
                                 </ul>
                             </div>
-                            <h4 class="grand-totall-title">Tổng đơn <span>@{{ totalCart | number }}đ</span></h4>
+                            <h4 class="grand-totall-title">Tổng đơn <span>@{{ totalCart | number }}VND</span></h4>
                             <a href="#">Thanh toán</a>
                         </div>
                     </div>

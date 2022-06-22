@@ -61,7 +61,6 @@ class InvoiceDetailApiController extends Controller
     {
         try {
             $data = $request->post();
-            $data['created_by']=20;
             $validator = Validator::make($data,  InvoiceDetail::RULES);
             if ($validator->fails()) {
                 $response = response()->json([
@@ -80,7 +79,7 @@ class InvoiceDetailApiController extends Controller
                     ]);
             }
         } catch (\Throwable $th) {
-            $response = response()->json([
+             $response = response()->json([
                 'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
                 'status' => false,
                 'message' => $th->getMessage()

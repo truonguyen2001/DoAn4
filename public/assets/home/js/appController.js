@@ -17,8 +17,8 @@ app.controller("myController", function ($scope, $http, $location) {
     $scope.extendQuerys = "";
     $scope.totalCart = 0;
     $scope.cart = JSON.parse(localStorage.getItem("cart") ?? "[]");
-    //$scope.baseUrl = baseUrl;
-    $scope.baseUrl = "https://localhost:44394";
+    $scope.baseUrl = baseUrl;
+    //$scope.baseUrl = "https://localhost:44394";
     $scope.getDataOnInit = true;
     let sent = 0;
     $scope.$watchCollection("cart", function (newCol, oldCol, value) {
@@ -51,7 +51,7 @@ app.controller("myController", function ($scope, $http, $location) {
     }
     $scope.getList = () => {
         if (route) {
-            const url = $scope.baseUrl + $scope.baseUrl + `/api/admin/${route}?page=${
+            const url = $scope.baseUrl + `/api/admin/${route}?page=${
                 $scope.page
             }&limit=${
                 $scope.limit
@@ -184,7 +184,7 @@ app.controller("myController", function ($scope, $http, $location) {
                     }
                 }
             });
-        }, 2000);
+        }, 3000);
     });
 
     $scope.categories = [];
@@ -263,7 +263,7 @@ app.controller("myController", function ($scope, $http, $location) {
                         }
                     }
                 })
-            }, 1000);
+            }, 3000);
         }
     });
     $scope.addCart = function (value, quantity = 1) {

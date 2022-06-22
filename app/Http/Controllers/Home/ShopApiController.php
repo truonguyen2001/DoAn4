@@ -14,16 +14,14 @@ class ShopApiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        $products = Category::find($id)->products;
-        return view('home/pages/shop-list', compact('products'));
+        return view('home/pages/shop-list');
     }
 
     public function shop(Request $request)
     {
-        $products = Product::all();
-        return view('home/pages/shop',compact( 'products'));
+        return view('home/pages/shop');
     }
 
     public function Cart()

@@ -46,8 +46,11 @@
                         </div>
                         <div class="pricing-meta">
                             <ul>
+                                <li class="old-price">
+                                    @{{ product.min_price * 1.05 | number }}VND
+                                </li>
                                 <li class="current-price">
-                                    @{{ product.min_price | number }}đ
+                                    @{{ product.min_price | number }}VND
                                 </li>
                                 <li class="discount-price">New</li>
                             </ul>
@@ -123,10 +126,12 @@
                         </div>
                         <div class="pricing-meta">
                             <ul>
-                                <li class="current-price">
-                                    @{{ product.min_price | number }}đ
+                                <li class="old-price">
+                                    @{{ product.min_price * 1.05 | number }}VND
                                 </li>
-                                <li class="old-price">€18.90</li>
+                                <li class="current-price">
+                                    @{{ product.min_price | number }}VND
+                                </li>
                                 <li class="discount-price">New</li>
                             </ul>
                         </div>

@@ -7,6 +7,7 @@ use App\Http\Resources\InvoiceDetailResource;
 use App\Models\Invoice;
 use App\Models\InvoiceDetail;
 use App\Models\ProductDetail;
+use Illuminate\Support\Facades\DB;
 
 class InvoiceDetailService
 {
@@ -50,20 +51,15 @@ class InvoiceDetailService
         return $deleted;
     }
 
-    public function create(array|InvoiceDetail $data)
+    public function create(array $data)
     {
-        $invoiceDetail = is_array($data) ?
+        $productDetail = ProductDetail::find($data["product_detail_id"]);
+        $data["price"] = $productDetail->out_price;
+        $invoiceDetail = 
             InvoiceDetail::create($data)
-            : $data;
+            ;
         if ($invoiceDetail->save()) {
-            $invoice = Invoice::find($invoiceDetail->invoice_id);
-            if ($invoice) {
-                $query = InvoiceDetail::query()
-                    ->where('invoice_id', '=', $invoice->id);
-                $invoice->quantity = $query->sum('remaining_quantity');
-                $invoice->option_count = $query->count();
-                $invoice->save();
-            }
+            DB::statement("UPDATE invoices SET TOTAL = (SELECT SUM(price * quantity) FROM invoice_details WHERE invoice_id = invoices.id) WHERE id = {$invoiceDetail->invoice_id}");
             return $invoiceDetail->id;
         } else return 0;
     }
@@ -80,7 +76,7 @@ class InvoiceDetailService
         }
         if ($option['with_detail'] == 'true') {
             $query->with('invoice');
-            $query->with('productDetail');
+            $query->with('productDetail.product');
         }
         // if ($option['search']) {
         //     $query->where('invoices.name', 'LIKE', "%".$option['search']."%");

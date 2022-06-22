@@ -35,13 +35,15 @@ Route::prefix('admin')->group(function () {
     Route::get('product/{id}', [AdminController::class, 'ProductDetail']);
     Route::get('invoice', [AdminController::class, 'Invoice']);
     Route::post('invoice/{id}', [AdminController::class, 'InvoiceSave']);
-    Route::get('invoice/{id}', [AdminController::class, 'InvoiceDetail']);
     Route::get('import', [AdminController::class, 'Import']);
     Route::get('category', [AdminController::class, 'Category']);
     Route::get('product-detail', [AdminController::class, 'ProductDetails']);
     Route::get('providers', [AdminController::class, 'Providers']);
     Route::get('customer', [AdminController::class, 'Customer']);
     Route::get('employee', [AdminController::class, 'Employee']);
+    Route::get('invoice/create',function() {
+        return view("admin/pages/createInvoice");
+    });
 });
 
 Route::get('', function () {
@@ -59,8 +61,7 @@ Route::prefix('home')->group(function () {
     //     return view('home/pages/shop', ['categories' => Category::all()]);
     // })->name('shop');
 
-    Route::get('pages/shop/{id}', [ShopApiController::class, 'index'])->name('shop-list');
-    Route::get('pages/shop', [ShopApiController::class, 'shop'])->name('shop');
+    Route::get('pages/shop', [ShopApiController::class, 'index'])->name('shop');
     Route::get('pages/cart', [ShopApiController::class, 'Cart']);
     Route::get('pages/contact', function () {
         return view('home/pages/contact', ['categories' => Category::all()]);

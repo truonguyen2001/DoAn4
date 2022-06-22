@@ -29,7 +29,6 @@
                         @{{ f.display }}
                     </th>
                     <th style="cursor: default;">Chức năng</th>
-                  
                 </tr>
             </thead>
             <tbody>

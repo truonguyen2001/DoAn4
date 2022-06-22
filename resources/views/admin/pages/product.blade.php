@@ -3,7 +3,7 @@
     Admin - Sản phẩm
 @endsection
 @section('page-title')
-    Danh sách sản phẩm
+    Sản phẩm
 @endsection
 @section('main-content')
     <div ng-app="myApp" ng-controller="myController">
@@ -25,7 +25,7 @@
             <thead>
                 <tr>
                     <th scope="col">STT</th>
-                    <th style="cursor: pointer;" ng-repeat="f in fields | visible" ng-click="order(f.field)" scope="col">
+                    <th style="cursor: pointer;" ng-repeat="f in fields | visible" ng-click="order(f)" scope="col">
                         @{{ f.display }}
                     </th>
                     <th style="cursor: default;"></th>
@@ -35,13 +35,16 @@
                 <tr ng-repeat="item in data">
                     <th scope="row">@{{ $index + 1 }}</th>
                     <td ng-repeat="f in fields | visible">
-                        <span ng-if="f.type != 'file' && f.type != 'editor'"> @{{ item | value: f.field }}</span>
+                        <span ng-if="f.type != 'file' && f.type != 'editor' && f.type != 'number' && f.type!='checkbox'"> @{{ item | value: f.field }}</span>
+                        <input ng-if='f.type == "checkbox"' ng-model="item[f.field]" type="checkbox"  onclick="return false;">
+
+                        <span ng-if="f.type == 'number'"> @{{ item | value: f.field | number }}</span>
                         <div ng-bind-html="item[f.field]" ng-if="f.type == 'editor'" class="ql-contaienr">
                         </div>
                         <img height="100" ng-if="f.type == 'file'" src="@{{baseUrl}}/api/files/@{{ item | value: f.field }}" />
                     </td>
                     <td>
-                        <a href="/admin/product/@{{ item.id }}" class="btn btn-success m-1"><i class="fa-solid fa-circle-info"></i></a>
+                        <a href="/admin/product/@{{ item.id }}" class="btn btn-success m-1"><i class="fa-solid fa-eye"></i></a>
                         <button ng-click="showEdit(item)" type="button" class="btn btn-info m-1" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
                             <i class="fa-solid fa-pen"></i>
@@ -73,7 +76,7 @@
             <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel"> @{{ deleting ? 'Xác nhận' : 'Sửa sản phẩm ' }} </h5>
+                        <h5 class="modal-title" id="staticBackdropLabel"> @{{ deleting ? 'Xác nhận' : 'Thông tin loại sản phẩm ' }} </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
                     </div>
                     <div class="modal-body">
@@ -82,10 +85,10 @@
                         </div>
                         <div ng-if="!deleting" class="container-fluid">
                             <div class="row">
-                                <div class="mb-3 col-md-6 col-12 form-group">
+                                <div class="mb-3 col-md-6 col-12">
                                     <label for="categories" class="form-label fw-bold">Loại sản phẩm</label>
                                     <select id="selectCate" data-ng-options="o.name for o in categories"
-                                        class="form-control" data-ng-model="selectedCategory"></select>
+                                        class="form-select" data-ng-model="selectedCategory"></select>
                                 </div>
                                 <div ng-repeat="f in fields | editable" ng-class="f.type != 'editor' ? 'col-md-6' : ''"
                                     class="form-group mb-3 col-12">

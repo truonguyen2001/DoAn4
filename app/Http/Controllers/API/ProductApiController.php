@@ -34,6 +34,8 @@ class ProductApiController extends Controller
                         'search' => $request->get('search') ?? null,
                         'with_detail' => $request->get('with_detail') ?? false,
                         'with_images' => $request->get('with_images') ?? false,
+                        'visible_only' => $request->get('visible_only') ?? false,
+                        'category' => $request->get('category')
                     ]
                 );
             $response = response()->json([

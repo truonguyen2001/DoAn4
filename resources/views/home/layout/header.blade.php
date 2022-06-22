@@ -31,17 +31,17 @@ $categories = Category::all();
                                                 <ul>
                                                     {{-- <li class="mega-menu-title"><a href="#">Shop Grid</a></li> --}}
                                                     <li><a
-                                                            href="{{ route('shop-list', ['id' => $item->id]) }}">{{ $item->name }}</a>
+                                                            href="{{ route('shop') }}?category={{$item->id}}">{{ $item->name }}</a>
                                                     </li>
                                                 @elseif ($key % 5 == 4 || $key == count($categories) - 1)
                                                     <li><a
-                                                            href="{{ route('shop-list', ['id' => $item->id]) }}">{{ $item->name }}</a>
+                                                            href="{{ route('shop') }}?category={{$item->id}}">{{ $item->name }}</a>
                                                     </li>
                                                 </ul>
                                             </li>
                                         @else
                                             <li><a
-                                                    href="{{ route('shop-list', ['id' => $item->id]) }}">{{ $item->name }}</a>
+                                                    href="{{ route('shop') }}?category={{$item->id}}">{{ $item->name }}</a>
                                             </li>
                                         @endif
                                     @endforeach
@@ -109,7 +109,7 @@ $categories = Category::all();
                                             </div>
                                             <div class="shopping-cart-title">
                                                 <h4><a href="single-product.html">@{{ c.product.product.name }}</a></h4>
-                                                <span>@{{ c.product.out_price | number }}đ</span>
+                                                <span>@{{ c.product.out_price | number }} VND</span>
                                                 <div class="shopping-cart-delete">
                                                     <a href="#"><i ng-click="deleteCart(c.product, c.quantity)" class="ion-android-cancel"></i></a>
                                                 </div>
@@ -118,12 +118,12 @@ $categories = Category::all();
                                         </li>
                                     </ul>
                                     <div class="shopping-cart-total">
-                                        <h4>Đơn giá : <span>@{{ totalCart | number }}đ</span></h4>
-                                        <h4>Phí ship : <span>0đ</span></h4>
-                                        <h4 class="shop-total">Tổng tiền : <span>@{{ totalCart | number }}đ</span></h4>
+                                        <h4>Đơn giá : <span>@{{ totalCart | number }} VND</span></h4>
+                                        <h4>Phí ship : <span>0 VND</span></h4>
+                                        <h4 class="shop-total">Tổng tiền : <span>@{{ totalCart | number }} VND</span></h4>
                                     </div>
                                     <div class="shopping-cart-btn text-center">
-                                        <a class="default-btn" href="home/pages/checkout">Thanh toán</a>
+                                        <a class="default-btn" href="/home/pages/checkout">Thanh toán</a>
                                     </div>
                                 </div>
                             </div>

@@ -25,22 +25,6 @@
             </a>
           </li> --}}
           <li class="nav-item menu-items">
-            
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <span class="menu-icon">
-                <i class="mdi mdi-laptop"></i>
-              </span>
-              <span class="menu-title">Quản lý hóa đơn</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/admin/invoice">Quản lý hóa đơn bán</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/admin/invoice-detail">Chi tiết hóa đơn bán</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item menu-items">
             <a class="nav-link" href="/admin/category">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
@@ -49,11 +33,33 @@
             </a>    
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="/admin/product">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Quản lý sản phẩm</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/admin/product">
+                  <span class="menu-icon">
+                  <i class="mdi mdi-chart-bar"></i>
+                </span>Sản phẩm</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/product-detail">
+                  <span class="menu-icon">
+                  <i class="mdi mdi-chart-bar"></i>
+                </span>Chi tiết sản phẩm</a></li>
+              </ul>
+            </div>
+          </li>
+          
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="/admin/invoice">
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>
-              <span class="menu-title">Quản lý sản phẩm</span>
+              <span class="menu-title">Quản lý hóa đơn</span>
             </a>
           </li>
           {{-- <li class="nav-item menu-items">

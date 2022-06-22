@@ -325,8 +325,6 @@
         <script src="{{asset('assets/admin/template1/plugins/sparkline-chart/jquery.sparkline.min.js')}}"></script>
         <script src="{{asset('assets/admin/template1/pages/jquery.sparkline.init.js')}}"></script>
         <script src="{{asset('assets/admin/template1/plugins/chart-js/Chart.bundle.js')}}"></script>
-        <script src="{{asset('assets/admin/template1/plugins/morris-chart/raphael-min.js')}}"></script>
-        <script src="{{asset('assets/admin/template1/plugins/morris-chart/morris.js')}}"></script>
         <script src="{{asset('assets/admin/template1/pages/dashboard-init.js')}}"></script>
         <!--app js-->
         <script src="{{asset('assets/admin/template1/js/jquery.app.js')}}"></script>

@@ -30,7 +30,8 @@ extendController = ($scope, $http) => {
     $scope.showAddNew = () => {
         for (let field of $scope.fields.filter((v) => !v.readonly)) {
             $scope.item[field.field] = field.default;
-        }        $scope.visible = true;
+        }
+        $scope.visible = true;
         $scope.editting = false;
         $scope.deleting = false;
     };

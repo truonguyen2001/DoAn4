@@ -1,9 +1,9 @@
 @extends('admin/layout/admin-layout')
 @section('title')
-    Admin - Chi tiết sản phẩm
+    Admin - Sản phẩm
 @endsection
 @section('page-title')
-    Danh sách sản phẩm
+    Sản phẩm
 @endsection
 @section('main-content')
     <div ng-app="myApp" ng-controller="myController">
@@ -37,7 +37,7 @@
                         <label for="">Ảnh</label>
                         <input name="file" type="file" class="form-control">
                         <img style="object-fit: contain; max-height: 30vh"
-                            src="/api/files/{{isset($product->image) ?$product->image->file_path:'' }}" />
+                            src="@{{baseUrl}}/api/files/{{ $product->image->file_path }}" />
                     </div>
                     <div class="mb-3 fw-bold form-group col-12">
                         <label for="">Mô tả</label>
@@ -78,7 +78,7 @@
                         <span ng-if="f.type != 'file' && f.type != 'editor'"> @{{ item | value: f.field }}</span>
                         <div ng-bind-html="item[f.field]" ng-if="f.type == 'editor'" class="ql-contaienr">
                         </div>
-                        <img height="100" ng-if="f.type == 'file'" src="/api/files/@{{ item | value: f.field }}" />
+                        <img height="100" ng-if="f.type == 'file'" src="@{{baseUrl}}/api/files/@{{ item | value: f.field }}" />
                     </td>
                     <td>
                         <button ng-click="showEdit(item)" type="button" class="btn btn-info m-1" data-bs-toggle="modal"
@@ -112,7 +112,7 @@
             <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel"> @{{ deleting ? 'Xác nhận' : 'Sửa sản phẩm ' }} </h5>
+                        <h5 class="modal-title" id="staticBackdropLabel"> @{{ deleting ? 'Xác nhận' : 'Thông tin loại sản phẩm ' }} </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
                     </div>
                     <div class="modal-body">

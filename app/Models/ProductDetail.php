@@ -34,7 +34,6 @@ class ProductDetail extends FullAuditedEntity
         "id",
         "color",
         "size",
-        "parameter",
         "out_price",
         "in_price",
         "remaining_quantity",

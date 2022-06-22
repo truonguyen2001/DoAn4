@@ -31,6 +31,7 @@ extendController = ($scope, $http) => {
             display: "Số lượng",
             default: "",
             type: "text",
+            readonly: true
         },
         {
             hidden: false,
@@ -64,7 +65,7 @@ extendController = ($scope, $http) => {
     }
 
     $scope.showEdit = (item) => {
-        const file = document.getElementById("default_image.file_path");
+        const file = document.querySelector("input[type=file]");
         if (file != null) file.value = "";
         $scope.id = item.id;
         for (let field of $scope.fields.filter((v) => !v.readonly)) {
@@ -82,14 +83,14 @@ extendController = ($scope, $http) => {
         for (let field of $scope.fields.filter((v) => !v.readonly)) {
             $scope.item[field.field] = field.default;
         }
-        const file = document.getElementById("image.file_path");
+        const file = document.querySelector("input[type=file]");
         if (file != null) value = "";
         editor.setData("");
         $scope.editting = false;
         $scope.deleting = false;
     };
     $scope.save = () => {
-        const fileE = document.getElementById("image.file_path");
+        const fileE = document.querySelector("input[type=file]");
         let file;
         if (fileE != null) file = fileE.files[0];
         let item = {};
@@ -98,14 +99,14 @@ extendController = ($scope, $http) => {
         }
         let index = document.getElementById("selectCate")?.selectedIndex ?? -1;
         if (index >= 0) $scope.selectedCategory = $scope.categories[index];
-        item.category_id = $scope.selectedCategory.id;
+        item.category_id = $scope.selectedCategory?.id;
         if (file != undefined && file != null) {
-            $scope.upLoadFile(file, $scope.baseUrl + "/api/upload").then((res) => {
+            $scope.upLoadFile(file,$scope.baseUrl+ "/api/upload").then((res) => {
                 if (res.data.status == true) {
                     item.default_image = res.data.data.id;
                 }
                 item.description = editor.getData();
-                item.category_id = $scope.selectedCategory.id;
+                item.category_id = $scope.selectedCategory?.id;
                 if ($scope.editting) {
                     $scope.update($scope.id, item);
                 } else if ($scope.deleting) {
@@ -116,7 +117,7 @@ extendController = ($scope, $http) => {
             });
         } else {
             item.description = editor.getData();
-            item.category_id = $scope.selectedCategory.id;
+            item.category_id = $scope.selectedCategory?.id;
             if ($scope.editting) {
                 $scope.update($scope.id, item);
             } else if ($scope.deleting) {
@@ -131,7 +132,7 @@ extendController = ($scope, $http) => {
         $scope.deleting = true;
     };
     $scope.categories = [];
-    $http.get($scope.baseUrl + "/api/admin/categories?page=1&limit=1000").then((res) => {
+    $http.get($scope.baseUrl+"/api/admin/categories?page=1&limit=1000").then((res) => {
         if (res.data.status == true) {
             $scope.categories = res.data.data;
         }

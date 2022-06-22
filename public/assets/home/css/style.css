@@ -3715,12 +3715,20 @@ a.quick_view:hover{
     text-decoration: line-through;
     margin-right: 2px;
     font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .old-price.not-cut{
     text-decoration: none;
+    color: #dd0430;
+    font-size: 30;
 }
 .pricing-meta li {
     display: inline-block;
+}
+.pricing-meta ul {
+    display: flex;
+    
 }
 .current-price {
     color: #cf2929;

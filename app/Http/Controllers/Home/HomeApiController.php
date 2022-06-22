@@ -15,9 +15,7 @@ class HomeApiController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::all();
-        $product = Product::orderByDesc('created_at')->take(10)->get();
-        return view("home/pages/index",compact( 'products', 'product'));
+        return view("home/pages/index");
     }
 
     /**

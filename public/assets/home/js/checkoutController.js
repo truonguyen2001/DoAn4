@@ -27,7 +27,7 @@ extendController = ($scope, $http) => {
         });
         $scope.invoice.customer_name = $scope.customer.name;
         $scope.invoice.phone_number = $scope.customer.phone;
-        $scope.invoice.address = $scope.customer.town;
+        $scope.invoice.address = $scope.customer.province;
         $scope.invoice.address += ", " + $scope.customer.district;
         $scope.invoice.address += ", " + $scope.customer.commune;
         $scope.invoice.address += ", " + $scope.customer.address;
@@ -39,15 +39,22 @@ extendController = ($scope, $http) => {
                 const id = res.data.data;
                 const addDetailUrl =
                     $scope.baseUrl + "/api/admin/invoice-details";
+                    let sent = 0;
                 $scope.details.forEach((detail) => {
+                    sent++;
                     $http.post(addDetailUrl, {
                         product_detail_id: detail.product_detail_id,
                         invoice_id: id,
                         quantity: detail.quantity,
+                    }).then(res => {
+                        sent--;
+                        if (sent == 0)
+                        {
+                            $scope.cart = [];
+                            window.location.href = "/home/pages/shop";
+                        }
                     });
                 });
-                $scope.cart = [];
-                window.location.href = "/contact?message=1&id=" + id;
             }
         });
         alert("Đặt hàng thành công")
